@@ -11,10 +11,6 @@ import java.beans.XMLDecoder;
 public class PointsIOController {
 	public boolean saveToBinary(ArrayList<Point> points, File f) {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(
-					new FileOutputStream(f));
-			oos.writeObject(points);
-			oos.close();
 			return true;
 		} catch (Exception ex) {
 			return false;
@@ -22,9 +18,6 @@ public class PointsIOController {
 	}
 	public boolean saveToXML(ArrayList<Point> points, File f) {
 		try {
-			XMLEncoder xmlEnc = new XMLEncoder(new FileOutputStream(f));
-			xmlEnc.writeObject(points);
-			xmlEnc.close();
 			return true;
 		} catch (Exception ex) {
 			return false;
@@ -35,21 +28,14 @@ public class PointsIOController {
 	}
 	public ArrayList<Point> readFromBinary(File f) {
 		try {
-			ArrayList<Point> results = new ArrayList<Point>();
-			ObjectInputStream ois = new ObjectInputStream( 
-					new FileInputStream(f));
-			results = (ArrayList<Point>)(ois.readObject());
-			return results;
+			return null;
 		} catch (Exception ex) {
 			return null;
 		}
 	}
 	public ArrayList<Point> readFromXML(File f) {
 		try {
-			ArrayList<Point> results;
-			XMLDecoder xmlDec = new XMLDecoder(new FileInputStream(f));
-			results = (ArrayList<Point>)(xmlDec.readObject());
-			return results;
+			return null;
 		} catch (Exception ex) {
 			return null;
 		}

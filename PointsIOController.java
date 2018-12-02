@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.beans.XMLEncoder;
+import java.beans.XMLDecoder;
 
 @SuppressWarnings("unchecked")
 public class PointsIOController {
@@ -19,7 +21,14 @@ public class PointsIOController {
 		}
 	}
 	public boolean saveToXML(ArrayList<Point> points, File f) {
-		return true;
+		try {
+			XMLEncoder xmlEnc = new XMLEncoder(new FileOutputStream(f));
+			xmlEnc.writeObject(points);
+			xmlEnc.close();
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
 	}
 	public boolean saveToJSON(ArrayList<Point> points, File f) {
 		return true;
@@ -36,7 +45,14 @@ public class PointsIOController {
 		}
 	}
 	public ArrayList<Point> readFromXML(File f) {
-		return null;
+		try {
+			ArrayList<Point> results;
+			XMLDecoder xmlDec = new XMLDecoder(new FileInputStream(f));
+			results = (ArrayList<Point>)(xmlDec.readObject());
+			return results;
+		} catch (Exception ex) {
+			return null;
+		}
 	}
 	public ArrayList<Point> readFromJSON(File f) {
 		return null;

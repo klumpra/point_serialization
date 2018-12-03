@@ -31,7 +31,25 @@ public class PointsIOController {
 		}
 	}
 	public boolean saveToJSON(ArrayList<Point> points, File f) {
-		return true;
+		try {
+			PrintWriter pw = new PrintWriter(new BufferedWriter(
+					new FileWriter(f)));
+			JSONArray arr = new JSONArray();
+			JSONObject obj;
+			for (Point p : points) {
+				obj = new JSONObject();
+				obj.put("x",p.getX());
+				obj.put("y",p.getY());
+				arr.add(obj);
+			}
+			JSONObject list = new JSONObject();
+			list.put("points", arr);
+			pw.println(list.toJSONString());
+			pw.close();
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
 	}
 	public ArrayList<Point> readFromBinary(File f) {
 		try {
